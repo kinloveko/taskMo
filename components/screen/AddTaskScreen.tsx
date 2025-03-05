@@ -82,7 +82,7 @@ export default function AddTaskScreen({ navigation }: AddTaskScreenProps) {
       setDateStart(null);
       setDueDate(null);
       setPriority("Medium");
-      navigation.goBack();
+      navigation.navigate("Home");
     }
 
     setLoading(false); // Stop loading
@@ -264,6 +264,8 @@ export default function AddTaskScreen({ navigation }: AddTaskScreenProps) {
             if (event.type === "set") {
               setDateStart(date ?? new Date());
               setShowStartPicker(false);
+            } else {
+              setShowStartPicker(false);
             }
           }}
         />
@@ -308,6 +310,8 @@ export default function AddTaskScreen({ navigation }: AddTaskScreenProps) {
           onChange={(event, date) => {
             if (event.type === "set") {
               setDueDate(date ?? new Date());
+              setShowDuePicker(false);
+            } else {
               setShowDuePicker(false);
             }
           }}

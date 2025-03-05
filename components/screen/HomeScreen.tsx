@@ -90,10 +90,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
     setRefreshing(false);
   };
 
-  // Fetch tasks on mount
   useEffect(() => {
-    fetchTasks(); // Initial fetch
-
     const subscription = supabase
       .channel("todos-changes") // Unique channel name
       .on(
@@ -101,13 +98,24 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         { event: "*", schema: "public", table: "todos" },
         (payload) => {
           console.log("Change received!", payload);
-          fetchTasks(); // Fetch updated tasks
+          // Only fetch if the event is related to an insert, update, or delete
+          if (
+            payload.eventType === "INSERT" ||
+            payload.eventType === "UPDATE" ||
+            payload.eventType === "DELETE"
+          ) {
+            fetchTasks(); // Fetch updated tasks on change
+          }
         }
       )
       .subscribe();
 
+    // Initial fetch
+    fetchTasks();
+
     return () => {
-      supabase.removeChannel(subscription); // Cleanup on unmount
+      // Cleanup the subscription on unmount
+      supabase.removeChannel(subscription);
     };
   }, []);
 
@@ -219,9 +227,12 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
     setSuccess(true);
 
     // Hide modal after 1.5 seconds
+    setLoading(true);
     setTimeout(() => {
+      fetchTasks();
       setSuccess(false);
     }, 1500);
+    setLoading(false);
   };
   const confirmDeleteTask = (taskId: number) => {
     setTaskToDelete(taskId);

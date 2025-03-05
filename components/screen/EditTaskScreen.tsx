@@ -318,6 +318,8 @@ export const EditTaskScreen = ({
               if (event.type === "set") {
                 setDateStart(date ?? new Date());
                 setShowStartPicker(false);
+              } else {
+                setShowStartPicker(false);
               }
             }}
           />
@@ -362,6 +364,8 @@ export const EditTaskScreen = ({
             onChange={(event, date) => {
               if (event.type === "set") {
                 setDueDate(date ?? new Date());
+                setShowDuePicker(false);
+              } else {
                 setShowDuePicker(false);
               }
             }}
