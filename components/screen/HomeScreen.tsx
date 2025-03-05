@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Modal,
   Platform,
+  Alert,
 } from "react-native";
 import {
   Text,
@@ -59,7 +60,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
 
     const { data: userData, error: userError } = await supabase.auth.getUser();
     if (userError || !userData?.user?.id) {
-      console.error("Error getting user:", userError);
+      Alert.alert("Error getting user: " + userError);
       setLoading(false);
       return;
     }

@@ -54,7 +54,7 @@ export default function Auth() {
         label="Email"
         mode="outlined"
         value={email}
-        activeOutlineColor="semiblack"
+        activeOutlineColor="black"
         onChangeText={setEmail}
         keyboardType="email-address"
         autoCapitalize="none"
@@ -66,7 +66,7 @@ export default function Auth() {
       <TextInput
         label="Password"
         mode="outlined"
-        activeOutlineColor="semiblack"
+        activeOutlineColor="black"
         value={password}
         onChangeText={setPassword}
         secureTextEntry={secureText}

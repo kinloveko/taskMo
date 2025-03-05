@@ -12,7 +12,9 @@ import {
   Modal,
   Portal,
 } from "react-native-paper";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePicker, {
+  DateTimePickerAndroid,
+} from "@react-native-community/datetimepicker";
 import { supabase } from "../../lib/supabase";
 import { AddTaskScreenProps } from "../../lib/navigationTypes";
 
@@ -224,7 +226,7 @@ export default function AddTaskScreen({ navigation }: AddTaskScreenProps) {
       {/* Start Date Modal */}
       <Portal>
         <Modal
-          visible={showStartPicker}
+          visible={showStartPicker && Platform.OS === "ios"}
           onDismiss={() => setShowStartPicker(false)}
           contentContainerStyle={{
             backgroundColor: "white",
@@ -253,11 +255,23 @@ export default function AddTaskScreen({ navigation }: AddTaskScreenProps) {
           </Button>
         </Modal>
       </Portal>
-
+      {Platform.OS === "android" && showStartPicker && (
+        <DateTimePicker
+          value={tempDate || new Date()}
+          mode="date"
+          display="default"
+          onChange={(event, date) => {
+            if (event.type === "set") {
+              setDateStart(date ?? new Date());
+              setShowStartPicker(false);
+            }
+          }}
+        />
+      )}
       {/* Due Date Modal */}
       <Portal>
         <Modal
-          visible={showDuePicker}
+          visible={showDuePicker && Platform.OS === "ios"}
           onDismiss={() => setShowDuePicker(false)}
           contentContainerStyle={{
             backgroundColor: "white",
@@ -275,6 +289,7 @@ export default function AddTaskScreen({ navigation }: AddTaskScreenProps) {
             }}
           />
           <Button
+            buttonColor="#2C3E50"
             mode="contained"
             onPress={() => {
               setDueDate(tempDate);
@@ -285,7 +300,19 @@ export default function AddTaskScreen({ navigation }: AddTaskScreenProps) {
           </Button>
         </Modal>
       </Portal>
-
+      {Platform.OS === "android" && showDuePicker && (
+        <DateTimePicker
+          value={tempDate || new Date()}
+          mode="date"
+          display="default"
+          onChange={(event, date) => {
+            if (event.type === "set") {
+              setDueDate(date ?? new Date());
+              setShowDuePicker(false);
+            }
+          }}
+        />
+      )}
       {/* Priority Dropdown */}
       <Text
         style={{

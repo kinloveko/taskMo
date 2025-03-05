@@ -61,7 +61,25 @@ export default function ProfileScreen({ session }: { session: Session }) {
       setLoading(false);
     }
   }
-
+  // Function for handling sign-out
+  const handleSignout = async () => {
+    try {
+      // Attempt to sign out
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        throw error; // If sign-out fails, throw an error to enter the catch block
+      }
+      console.log("Successfully signed out");
+    } catch (error) {
+      const { data: userData, error: userError } =
+        await supabase.auth.getUser();
+      if (userError || !userData?.user?.id) {
+        Alert.alert("Error while signing out " + userError);
+        setLoading(false);
+        return;
+      }
+    }
+  };
   return (
     <View style={styles.container}>
       <Card style={styles.card}>
@@ -118,7 +136,9 @@ export default function ProfileScreen({ session }: { session: Session }) {
 
           <Button
             mode="outlined"
-            onPress={() => supabase.auth.signOut()}
+            onPress={async () => {
+              handleSignout();
+            }}
             style={styles.signOutButton}
             textColor="black"
           >

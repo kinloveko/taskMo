@@ -279,7 +279,7 @@ export const EditTaskScreen = ({
 
         {/* Start Date Modal */}
         <Modal
-          visible={showStartPicker}
+          visible={showStartPicker && Platform.OS === "ios"}
           onDismiss={() => setShowStartPicker(false)}
           contentContainerStyle={{
             backgroundColor: "white",
@@ -309,10 +309,22 @@ export const EditTaskScreen = ({
             Done
           </Button>
         </Modal>
-
+        {Platform.OS === "android" && showStartPicker && (
+          <DateTimePicker
+            value={tempDate || new Date()}
+            mode="date"
+            display="default"
+            onChange={(event, date) => {
+              if (event.type === "set") {
+                setDateStart(date ?? new Date());
+                setShowStartPicker(false);
+              }
+            }}
+          />
+        )}
         {/* Due Date Modal */}
         <Modal
-          visible={showDuePicker}
+          visible={showDuePicker && Platform.OS === "ios"}
           onDismiss={() => setShowDuePicker(false)}
           contentContainerStyle={{
             backgroundColor: "white",
@@ -331,6 +343,7 @@ export const EditTaskScreen = ({
           />
           <Button
             mode="contained"
+            buttonColor="#2C3E50"
             onPress={() => {
               if (tempDate) {
                 setDueDate(tempDate);
@@ -341,6 +354,19 @@ export const EditTaskScreen = ({
             Done
           </Button>
         </Modal>
+        {Platform.OS === "android" && showDuePicker && (
+          <DateTimePicker
+            value={tempDate || new Date()}
+            mode="date"
+            display="default"
+            onChange={(event, date) => {
+              if (event.type === "set") {
+                setDueDate(date ?? new Date());
+                setShowDuePicker(false);
+              }
+            }}
+          />
+        )}
         <Modal
           visible={showPriorityMenu}
           onDismiss={() => setShowPriorityMenu(false)}
