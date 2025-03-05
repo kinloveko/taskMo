@@ -19,6 +19,23 @@ You are tasked with creating a task management mobile application. The applicati
   - Swipe right to mark a task as completed.
   - Checklist items can be checked or unchecked.
 
+### Login
+<img width="1032" alt="Screenshot 2025-03-06 at 12 02 24 AM" src="https://github.com/user-attachments/assets/31855f03-8360-4a05-a799-a8c9fc6d968f" />
+
+### Registration
+<img width="1032" alt="Screenshot 2025-03-06 at 12 02 35 AM" src="https://github.com/user-attachments/assets/67e82c26-8b68-45b4-94bb-6022ed19a777" />
+
+### Dashboard
+<img width="1032" alt="Screenshot 2025-03-06 at 12 03 26 AM" src="https://github.com/user-attachments/assets/6441ff59-3062-4c37-bd33-04984dc7cf0d" />
+
+### Functionalities for Completing the task and Actions for edit and delete
+<img width="1032" alt="Screenshot 2025-03-06 at 12 03 40 AM" src="https://github.com/user-attachments/assets/3835bd8c-4d7b-42cd-9917-6e403e860ded" />
+<img width="1032" alt="Screenshot 2025-03-06 at 12 03 52 AM" src="https://github.com/user-attachments/assets/d97b7767-1b74-4e31-a985-724542fbd59e" />
+
+### Add task & Profile
+<img width="1032" alt="Screenshot 2025-03-06 at 12 04 12 AM" src="https://github.com/user-attachments/assets/a3331257-0375-4edb-a419-a827fc4464e5" />
+
+
 ## Technologies
 
 | **Category**               | **Details**                                                                 |
